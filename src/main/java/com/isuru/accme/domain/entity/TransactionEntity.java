@@ -17,7 +17,7 @@ public class TransactionEntity {
     @Id
     private String id;
 
-    private Long amount;
-
     private String userId;
+
+    private Long amount;
 }

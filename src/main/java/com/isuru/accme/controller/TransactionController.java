@@ -1,6 +1,6 @@
 package com.isuru.accme.controller;
 
-import com.isuru.accme.domain.dto.CreateTransactionRequest;
+import com.isuru.accme.domain.dto.request.CreateTransactionRequest;
 import com.isuru.accme.domain.dto.TransactionDto;
 import com.isuru.accme.domain.entity.TransactionEntity;
 import com.isuru.accme.exception.UserNotFoundException;
@@ -45,7 +45,7 @@ public class TransactionController {
             @PathVariable String userId,
             @RequestBody CreateTransactionRequest createTransactionRequest) {
         if (!userService.isExists(userId)) {
-            throw new UserNotFoundException(String.format("User with id=%s not found", userId));
+            throw new UserNotFoundException(userId);
         }
         TransactionEntity transactionEntity = TransactionEntity.builder()
                 .amount(createTransactionRequest.getAmount())

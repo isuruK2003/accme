@@ -1,6 +1,6 @@
 package com.isuru.accme.controller;
 
-import com.isuru.accme.domain.dto.CreateUserRequest;
+import com.isuru.accme.domain.dto.request.CreateUserRequest;
 import com.isuru.accme.domain.dto.UserDto;
 import com.isuru.accme.domain.entity.UserEntity;
 import com.isuru.accme.exception.UserNotFoundException;

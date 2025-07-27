@@ -1,4 +1,4 @@
-package com.isuru.accme.domain.dto;
+package com.isuru.accme.domain.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CreateTransactionRequest {
+public class ExceptionResponse {
 
-    private Long amount;
+    private Integer status;
+    private String message;
 }

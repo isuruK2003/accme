@@ -1,4 +1,4 @@
-package com.isuru.accme.domain.dto;
+package com.isuru.accme.domain.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,8 @@
 package com.isuru.accme.controller;
 
-import com.isuru.accme.domain.dto.ExceptionResponse;
+import com.isuru.accme.domain.dto.response.ExceptionResponse;
+import com.isuru.accme.domain.dto.response.InvalidRequestExceptionResponse;
+import com.isuru.accme.exception.InvalidRequestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +26,20 @@ public class ExceptionController {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ExceptionResponse> handleIllegalArgumentException(IllegalArgumentException exception) {
+    public ResponseEntity<ExceptionResponse> handleIllegalArgumentException(IllegalArgumentException illegalArgumentException) {
         ExceptionResponse response = ExceptionResponse.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
-                .message(exception.getMessage())
+                .message(illegalArgumentException.getMessage())
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<InvalidRequestExceptionResponse> handleInvalidRequestExceptionResponse(InvalidRequestException invalidRequestException) {
+        InvalidRequestExceptionResponse response = InvalidRequestExceptionResponse.builder()
+                .status(HttpStatus.BAD_REQUEST.value())
+                .message(invalidRequestException.getMessage())
+                .fieldErrors(invalidRequestException.getFieldErrors())
                 .build();
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
