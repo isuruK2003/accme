@@ -25,7 +25,7 @@ public class TransactionController {
     @GetMapping
     public ResponseEntity<List<TransactionDto>> getEntries(@PathVariable String userId) {
         if (!userService.isExists(userId)) {
-            throw new UserNotFoundException(String.format("User with id=%s not found", userId));
+            throw new UserNotFoundException(userId);
         }
 
         List<TransactionEntity> entryEntities = transactionService.getEntries(userId);

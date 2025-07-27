@@ -16,10 +16,10 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public UserEntity getUser(String id) throws UserNotFoundException {
-        Optional<UserEntity> userEntity = userRepository.findById(id);
+    public UserEntity getUser(String userId) throws UserNotFoundException {
+        Optional<UserEntity> userEntity = userRepository.findById(userId);
         if (userEntity.isEmpty()){
-            throw  new UserNotFoundException(String.format("User with id=%s not found", id));
+            throw  new UserNotFoundException(userId);
         }
         return userEntity.get();
     }
