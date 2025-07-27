@@ -1,6 +1,6 @@
 package com.isuru.accme.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.isuru.accme.domain.enums.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,15 +10,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class AccountDto {
 
     private String id;
 
-    @JsonProperty("fName")
-    private String fName;
+    private String userId;
 
-    @JsonProperty("lName")
-    private String lName;
+    private String name;
 
-    private String email;
+    private AccountType type;
 }

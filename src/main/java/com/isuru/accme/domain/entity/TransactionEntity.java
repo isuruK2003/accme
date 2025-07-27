@@ -11,13 +11,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "entries")
+@Document(collection = "transactions")
 public class TransactionEntity {
 
     @Id
     private String id;
 
     private String userId;
+
+    private String accountId;
 
     private Long amount;
 }

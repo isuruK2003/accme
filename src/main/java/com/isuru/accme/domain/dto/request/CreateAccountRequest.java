@@ -1,5 +1,6 @@
-package com.isuru.accme.domain.dto;
+package com.isuru.accme.domain.dto.request;
 
+import com.isuru.accme.domain.enums.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,13 +10,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionDto {
-
-    private String id;
+public class CreateAccountRequest {
 
     private String userId;
 
-    private String accountId;
+    private String name;
 
-    private Long amount;
+    private AccountType type;
 }

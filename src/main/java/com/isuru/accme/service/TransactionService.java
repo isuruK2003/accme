@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface TransactionService {
 
-    List<TransactionEntity> getEntries(String userId);
+    List<TransactionEntity> getTransactions(String userId);
 
-    TransactionEntity createEntry(TransactionEntity transactionEntity);
+    TransactionEntity createTransaction(TransactionEntity transactionEntity);
 
-    TransactionEntity getEntry(String entryId);
+    TransactionEntity getTransaction(String entryId);
 }

@@ -1,5 +1,6 @@
 package com.isuru.accme.domain.entity;
 
+import com.isuru.accme.domain.enums.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,17 +12,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "users")
-public class UserEntity {
+@Document(collection = "accounts")
+public class AccountEntity {
 
     @Id
     private String id;
 
-    private String fName;
+    private String userId;
 
-    private String lName;
+    private String name;
 
-    private String email;
-
-    private String password;
+    private AccountType type;
 }

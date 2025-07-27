@@ -17,17 +17,17 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionRepository transactionRepository;
 
     @Override
-    public List<TransactionEntity> getEntries(String userId) {
+    public List<TransactionEntity> getTransactions(String userId) {
         return transactionRepository.findAllByUserId(userId).orElse(Collections.emptyList());
     }
 
     @Override
-    public TransactionEntity createEntry(TransactionEntity transactionEntity) {
+    public TransactionEntity createTransaction(TransactionEntity transactionEntity) {
         return transactionRepository.save(transactionEntity);
     }
 
     @Override
-    public TransactionEntity getEntry(String entryId) {
+    public TransactionEntity getTransaction(String entryId) {
         return transactionRepository.findById(entryId)
                 .orElseThrow(() -> new TransactionNotFoundException(
                         String.format("Entry with entryId=%s cannot be found", entryId)
