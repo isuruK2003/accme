@@ -1,6 +1,5 @@
-package com.isuru.accme.domain.dto;
+package com.isuru.accme.domain.dto.response;
 
-import com.isuru.accme.domain.enums.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,13 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountDto {
+public class TransactionResponseDto {
 
     private String id;
 
     private String userId;
 
-    private String name;
+    private String accountId;
 
-    private AccountType type;
+    private Long amount;
 }

@@ -1,4 +1,4 @@
-package com.isuru.accme.domain.dto;
+package com.isuru.accme.domain.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -10,15 +10,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class CreateUserRequestDto {
 
-    private String id;
+    private String firstName;
 
-    @JsonProperty("fName")
-    private String fName;
-
-    @JsonProperty("lName")
-    private String lName;
+    private String lastName;
 
     private String email;
+
+    private String password;
 }

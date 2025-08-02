@@ -1,19 +1,22 @@
 package com.isuru.accme.controller;
 
-import com.isuru.accme.domain.dto.AccountDto;
-import com.isuru.accme.domain.dto.request.CreateAccountRequest;
+import com.isuru.accme.domain.dto.response.AccountResponseDto;
+import com.isuru.accme.domain.dto.request.CreateAccountRequestDto;
 import com.isuru.accme.domain.entity.AccountEntity;
 import com.isuru.accme.exception.UserNotFoundException;
+import com.isuru.accme.mapper.AccountMapper;
 import com.isuru.accme.service.AccountService;
 import com.isuru.accme.service.UserService;
-import com.isuru.accme.service.impl.AccountServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/accounts")
@@ -22,43 +25,26 @@ public class AccountController {
     private final UserService userService;
 
     private final AccountService accountService;
-    private final AccountServiceImpl accountServiceImpl;
 
-    @GetMapping("{userId}")
-    public ResponseEntity<List<AccountDto>> getAccounts(
-            @PathVariable String userId) throws UserNotFoundException {
-        if (!userService.isExists(userId)) {
-            throw new UserNotFoundException(userId);
-        }
-        List<AccountDto> accounts = accountService.getAccounts(userId).stream()
-                .map(accountEntity -> AccountDto.builder()
-                        .id(accountEntity.getId())
-                        .userId(accountEntity.getUserId())
-                        .name(accountEntity.getName())
-                        .type(accountEntity.getType())
-                        .build())
-                .toList();
-        return new ResponseEntity<>(accounts, HttpStatus.OK);
-    }
+    private final AccountMapper accountMapper;
 
     @PostMapping
-    public ResponseEntity<AccountDto> create(
-            @RequestBody CreateAccountRequest createAccountRequest) {
-        if (!userService.isExists(createAccountRequest.getUserId())) {
-            throw new UserNotFoundException(createAccountRequest.getUserId());
-        }
-        AccountEntity accountEntity = AccountEntity.builder()
-                .userId(createAccountRequest.getUserId())
-                .name(createAccountRequest.getName())
-                .type(createAccountRequest.getType())
-                .build();
+    public ResponseEntity<AccountResponseDto> create(
+            @RequestBody CreateAccountRequestDto createAccountRequestDto) {
+
+        AccountEntity accountEntity = accountMapper.toAccountEntity(createAccountRequestDto);
         AccountEntity createdAccount = accountService.createAccount(accountEntity);
-        AccountDto accountDto = AccountDto.builder()
-                .id(createdAccount.getId())
-                .userId(createdAccount.getUserId())
-                .name(createdAccount.getName())
-                .type(createdAccount.getType())
-                .build();
-        return new ResponseEntity<>(accountDto, HttpStatus.CREATED);
+        AccountResponseDto accountResponseDto = accountMapper.toAccountDto(createdAccount);
+        return new ResponseEntity<>(accountResponseDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping("{userId}")
+    public ResponseEntity<List<AccountResponseDto>> getAccounts(
+            @PathVariable String userId) throws UserNotFoundException {
+
+        List<AccountResponseDto> accounts = accountService.getAccounts(userId).stream()
+                .map(accountMapper::toAccountDto)
+                .toList();
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 }
