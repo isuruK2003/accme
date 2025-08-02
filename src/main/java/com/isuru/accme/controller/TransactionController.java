@@ -30,12 +30,18 @@ public class TransactionController {
         return new ResponseEntity<>(transactionResponseDto, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("{userId}")
     public ResponseEntity<List<TransactionResponseDto>> getTransactions(@PathVariable String userId) {
         List<TransactionEntity> transactionEntities = transactionService.getTransactions(userId);
         List<TransactionResponseDto> transactionResponseDtoList = transactionEntities.stream()
                 .map(transactionMapper::toTransactionDto)
                 .toList();
         return new ResponseEntity<>(transactionResponseDtoList, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{transactionId}")
+    public ResponseEntity<?> deleteTransaction(@PathVariable String transactionId) {
+        transactionService.deleteTransaction(transactionId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

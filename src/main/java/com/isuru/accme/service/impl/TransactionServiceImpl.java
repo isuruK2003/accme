@@ -48,4 +48,12 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionRepository.findById(transactionId)
                 .orElseThrow(() -> new TransactionNotFoundException(transactionId));
     }
+
+    @Override
+    public void deleteTransaction(String transactionId) {
+        if (!transactionRepository.existsById(transactionId)) {
+            throw new TransactionNotFoundException(transactionId);
+        }
+        transactionRepository.deleteById(transactionId);
+    }
 }

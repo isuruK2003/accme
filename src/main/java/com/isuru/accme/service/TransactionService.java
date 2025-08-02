@@ -12,4 +12,6 @@ public interface TransactionService {
     TransactionEntity createTransaction(TransactionEntity transactionEntity) throws UserNotFoundException;
 
     TransactionEntity getTransaction(String entryId);
+
+    void deleteTransaction(String transactionId);
 }
