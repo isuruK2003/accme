@@ -5,7 +5,6 @@ import com.isuru.accme.domain.dto.response.TransactionResponseDto;
 import com.isuru.accme.domain.entity.TransactionEntity;
 import com.isuru.accme.mapper.TransactionMapper;
 import com.isuru.accme.service.TransactionService;
-import com.isuru.accme.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,6 @@ import java.util.List;
 public class TransactionController {
 
     private final TransactionService transactionService;
-
-    private final UserService userService;
 
     private final TransactionMapper transactionMapper;
 

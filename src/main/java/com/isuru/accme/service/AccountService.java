@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface AccountService {
 
+    Boolean isExists(String accountId);
+
     AccountEntity createAccount(AccountEntity accountEntity) throws UserNotFoundException;
 
     List<AccountEntity> getAccounts(String userId) throws UserNotFoundException;

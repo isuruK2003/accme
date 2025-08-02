@@ -18,6 +18,10 @@ public class AccountServiceImpl implements AccountService {
 
     private final UserService userService;
 
+    public Boolean isExists(String accountId) {
+        return accountRepository.existsById(accountId);
+    }
+
     public AccountEntity createAccount(AccountEntity accountEntity) throws UserNotFoundException {
         if (!userService.isExists(accountEntity.getUserId())) {
             throw new UserNotFoundException(accountEntity.getUserId());
